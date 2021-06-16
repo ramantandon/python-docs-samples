@@ -59,7 +59,7 @@ class MainPage(webapp2.RequestHandler):
 
         self.response.write("""
           <form action="/sign?{}" method="post">
-            <div><textarea name="content" rows="3" cols="60"></textarea></div>
+            <div><textarea name="content" rows="3" cols="120"></textarea></div>
             <div><input type="submit" value="Sign Guestbook"></div>
           </form>
           <hr>
@@ -87,7 +87,7 @@ class MainPage(webapp2.RequestHandler):
             greetings = self.render_greetings(guestbook_name)
             try:
                 added = memcache.add(
-                    '{}:greetings'.format(guestbook_name), greetings, 10)
+                    '{}:greetings'.format(guestbook_name), greetings, 60)
                 if not added:
                     logging.error('Memcache set failed.')
             except ValueError:
